@@ -2,11 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import "antd/dist/antd.css";
+import {UserContextProvider} from './contexts/UserContext'
+import { BrowserRouter as Router } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <UserContextProvider>
+          <App />
+      </UserContextProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
