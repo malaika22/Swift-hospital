@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import {Input, Form, Button} from 'antd'
+import { Link , Redirect } from 'react-router-dom'
 import {EyeTwoTone, EyeInvisibleOutlined} from '@ant-design/icons';
 import { UserContext } from '../../contexts/UserContext';
 
@@ -10,9 +11,6 @@ const Login = () =>{
         password : ""
     })
 
-    useEffect(()=>{
-        console.log('current user', currentUser)
-    }, [currentUser])
     const finishHandler = () =>{
         if(credentials.email && credentials.password){
             console.log('credentials', credentials)
@@ -25,6 +23,10 @@ const Login = () =>{
             ...credentials,
             [e.target.name] : e.target.value
         })
+    }
+
+    if(Object.keys(currentUser).length>0) {
+        return <Redirect to="/" />
     }
 
     return(
@@ -74,8 +76,9 @@ const Login = () =>{
                       onClick={finishHandler}
                       htmlType="submit">Submit</Button>
                   </Form.Item>
-
                     </Form>
+
+                    <span className="signup-option">Don't have an account? <Link to="/signup">signup</Link></span>
                 </div>
         </div>
     )
