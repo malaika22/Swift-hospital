@@ -41,6 +41,8 @@ export const UserContextProvider = ({children}) =>{
     }
 
     const userSignup = async (credentials) =>{
+        console.log('signup credentials', credentials)
+        const {email, password} = credentials
         try{
             const res = await axios({
                 method: "post" ,
@@ -55,8 +57,12 @@ export const UserContextProvider = ({children}) =>{
                 } ,
                 withCredentials : true
             })
-            console.log('signup res', res.data.data.user)
-            setCurrentUser(res.data.data.user)
+            console.log('signup res', res.data.data.doctor)
+            setUserSession({
+                email , password
+            }, true)
+            setCurrentUser(res.data.data.doctor)
+            history.push("/")
         } catch(err) {
             console.log('signup error', err)
         }
