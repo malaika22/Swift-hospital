@@ -1,17 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import {Button} from 'antd'
-import {Redirect} from 'react-router-dom'
+import {Redirect, useHistory} from 'react-router-dom'
 import { UserContext } from '../../contexts/UserContext'
+import DoctorDashboard from './DoctorDashboard/DoctorDashboard'
 
 const Dashboard = () =>{
-    const {currentUser ,userLogout} = useContext(UserContext)
+    const {currentUser ,userLogout, loading, sessionUser} = useContext(UserContext)
     console.log('current user', currentUser)
-    if(Object.keys(currentUser).length === 0){
-        return <Redirect to="/login" />
-    }
+    const history = useHistory()
+    if(loading=== 'loading') {
+         console.log("session user", sessionUser)
+        return <div>Loadinggg</div> 
+    } else if(loading === 'no user') {
+       history.push('/login')
+    } else
     return(
-        <div>
-            <h1>Dashboard</h1>
+        <div className="dashboard-container">
+            <DoctorDashboard />
             <Button onClick={()=>userLogout()}>Logout</Button>
         </div>
     )
