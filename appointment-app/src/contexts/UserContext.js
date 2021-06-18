@@ -8,13 +8,17 @@ export const UserContext = createContext();
 export const UserContextProvider = ({children}) =>{
 
     const [currentUser, setCurrentUser] = useState({})
+    const [docPatients , setDocPatients] = useState([])
+    const [sessionUser , setSessionUser] = useState({})
+    const [loading, setLoading] = useState('loading')
     const history = useHistory()
     useEffect(()=>{
         console.log('get token', getToken())
         if(getToken()[0] && getToken()[1]){
             const [storageData] = getToken()
-            console.log("session data", storageData)
             userLogin(storageData)
+        } else{
+            setLoading('no user')
         }
     }, [])
 
@@ -33,10 +37,15 @@ export const UserContextProvider = ({children}) =>{
                 console.log("in success status", res.data.data.user)
                 setCurrentUser(res.data.data.user)
                 setUserSession(credentials , true)
-                //history.push("/dashboard")
+                getDoctorPatients()
+                setLoading('done')
+                history.push("/")
             }
         } catch(err) {
             console.log('login error', err)
+            setLoading(true)
+
+            history.push("/login")
         }
     }
 
@@ -84,12 +93,27 @@ export const UserContextProvider = ({children}) =>{
             }
     }
 
+    const getDoctorPatients = async () =>{
+        try{
+            const res = await axios.get("https://datamansys.herokuapp.com/api/v1/doctor/get-my-pateints", {
+                withCredentials: true
+            })
+            setDocPatients([...res.data.patients])
+            console.log(res.data.patients)
+        } catch(err) {
+            console.log('patient error' , err)
+        }
+    }
+
     return(
         <UserContext.Provider value={{
             currentUser,
             userLogin : userLogin,
             userSignup: userSignup ,
-            userLogout : userLogout
+            userLogout : userLogout ,
+            docPatients : docPatients ,
+            loading: loading,
+            sessionUser : sessionUser
         }}>
             {children}
         </UserContext.Provider>
