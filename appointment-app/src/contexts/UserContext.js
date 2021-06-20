@@ -10,7 +10,7 @@ export const UserContextProvider = ({children}) =>{
     const [currentUser, setCurrentUser] = useState({})
     const [docPatients , setDocPatients] = useState([])
     const [sessionUser , setSessionUser] = useState({})
-    const [loading, setLoading] = useState('loading')
+    const [loading, setLoading] = useState(true)
     const history = useHistory()
     useEffect(()=>{
         console.log('get token', getToken())
@@ -18,7 +18,8 @@ export const UserContextProvider = ({children}) =>{
             const [storageData] = getToken()
             userLogin(storageData)
         } else{
-            setLoading('no user')
+            //setLoading('no user')
+            history.push("/login")
         }
     }, [])
 
@@ -38,13 +39,12 @@ export const UserContextProvider = ({children}) =>{
                 setCurrentUser(res.data.data.user)
                 setUserSession(credentials , true)
                 getDoctorPatients()
-                setLoading('done')
+                setLoading(false)
                 history.push("/")
             }
         } catch(err) {
             console.log('login error', err)
             setLoading(true)
-
             history.push("/login")
         }
     }
@@ -86,7 +86,8 @@ export const UserContextProvider = ({children}) =>{
                     console.log("in condition")
                     removeUserSession()
                     setCurrentUser({})
-                    //history.push("/login")
+                    setLoading("no user")
+                    history.push("/login")
                 }
             } catch(err) {
                 console.log("sign out error", err)
