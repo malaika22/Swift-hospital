@@ -3,6 +3,7 @@ import { Layout } from 'antd'
 import DashboardHome from './DashboardHome/DashboardHome'
 import DashboardAppointment  from './DashboardAppointment/DashboardAppointment'
 import DashboardPatient from './DashboardPatient/DashboardPatient'
+import './styles.scss'
 
 const DoctorDashboardContent = ({current}) =>{
     const {Content} = Layout
@@ -20,7 +21,7 @@ const DoctorDashboardContent = ({current}) =>{
         }
     }
     return(
-       <Content>
+       <Content className="dashboard-content-container">
            {renderDashboardComponenet()}
        </Content>
     )
