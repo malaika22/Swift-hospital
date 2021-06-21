@@ -11,6 +11,7 @@ const DoctorSideBar = ({current, setCurrent}) =>{
         console.log('key' ,e.key)
         setCurrent(e.key)
     }
+    console.log('menu current', current)
     return(
         <Sider className="dashboardSider doctor-siderbar">
             <div className="sider-main-container">
