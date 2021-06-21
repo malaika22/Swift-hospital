@@ -24,6 +24,7 @@ export const UserContextProvider = ({children}) =>{
     }, [])
 
     const userLogin = async (credentials) =>{
+         history.push("/")
         try{
            const res = await axios({
                 method: 'post',
@@ -39,8 +40,7 @@ export const UserContextProvider = ({children}) =>{
                 setCurrentUser(res.data.data.user)
                 setUserSession(credentials , true)
                 getDoctorPatients()
-                setLoading(false)
-                history.push("/")
+                setLoading(false)  
             }
         } catch(err) {
             console.log('login error', err)
@@ -78,6 +78,8 @@ export const UserContextProvider = ({children}) =>{
     }
 
     const userLogout = async () =>{
+        console.log('user logout')
+        loading(true)
             try{
                 const res = await axios.get("https://datamansys.herokuapp.com/api/v1/doctor/logout-doctor")
                     console.log('res', res)
@@ -86,7 +88,7 @@ export const UserContextProvider = ({children}) =>{
                     console.log("in condition")
                     removeUserSession()
                     setCurrentUser({})
-                    setLoading("no user")
+                    setLoading(false)
                     history.push("/login")
                 }
             } catch(err) {
