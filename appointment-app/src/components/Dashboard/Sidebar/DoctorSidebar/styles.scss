@@ -1,0 +1,112 @@
+.dashboardSider {
+    flex: 0 0 20% !important;
+    max-width: 20% !important;
+    min-width: 200px !important;
+    width: 20% !important;
+    height: 100vh;
+    background: #49c5b6 !important;
+    .sider-main-container{
+        background: #49c5b6;
+        /* padding-left: 20px; */
+        //padding: 20px 20px;
+        .hospital-title{
+                padding: 20px;
+                font-size: 22px;
+                font-weight: 700;
+                color: white;
+                letter-spacing: 1px;
+                margin-bottom: 20px;
+        }
+        .sidebar-container{
+            .profile-div{
+                padding: 0px 20px;
+                .profile-info{
+                    display: flex;
+                    .profile-avatar{
+                        padding-right: 22px;
+                    }
+                    .profile-content{
+                        color: #ffff;
+                        .welcome-title{
+                            font-size: 14px;
+                        }
+                        .doctor-title{
+                                margin-bottom: 5px;
+                                font-weight: 700;
+                                font-size: 18px;
+                        }
+                        .icons-row{
+                            font-size: 16px;
+                            .icons{
+                                padding-right: 10px;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+                .report-container{
+                    .report-heading{
+                        margin: 15px 0px;
+                        color: white;
+                        font-size: 16px;
+                        font-weight: 700;
+                    }
+                    .report-info{
+                        display: flex;
+                        .report-box{
+                                background: white;
+                                /* padding: 10px 15px; */
+                                width: 33.3%;
+                                font-size: 15px;
+                                padding: 5px 5px;
+                                border-radius: 2px;
+                                margin-right: 10px;
+                        }
+                    }
+                }
+            }
+            .menu-container{
+                margin-top: 20px;
+                .menu-title{
+                    background-color: #363E46 ;
+                    font-size: 16px;
+                    padding-left: 20px;
+                    color: white;
+                    padding: 10px 20px;
+                }
+                .sidebar-menu{
+                    //padding-left: 20px;
+                    background: #30373e;
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    .menu-item{
+                        padding-left: 20px !important;
+                        font-size: 16px;
+                        color: white;
+                        .menu-icon{
+                            padding-right: 10px;
+                        } 
+                            &.ant-menu-item-selected{
+                                color: #000;
+                            }
+                          //  &.ant-menu-item-active{
+                           // background-color: transparent;
+                          //  color: blue;
+                           // }
+                    } 
+                }
+            }
+            .logout-container{
+                text-align: center;
+                /* padding-top: 20px; */
+                padding: 25px;
+                .ant-btn{
+                    border: 0px;
+                    background: transparent;
+                    color: white;
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}
