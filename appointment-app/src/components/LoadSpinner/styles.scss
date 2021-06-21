@@ -1,0 +1,26 @@
+.spinner-div {
+  height: 100vh;
+    /* text-align: unset; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+  .ant-spin {
+    font-size: 20px;
+    color: #bcb8b8;
+    .anticon-spin {
+      color: #bcb8b8;
+      font-size: 101px;
+      margin-bottom: 96px;
+    }
+
+  }
+      .company-title {
+        position: relative;
+        bottom: -8px;
+        font-size: 25px;
+        color: #f97c50;
+        font-weight: 700;
+    }
+}
