@@ -15,7 +15,7 @@ const Dashboard = () =>{
     } 
     else
     return(
-        <div className="dashboard-container">
+        <div className="dashboard-container" style={{boxSizing: "border-box"}}>
             <DoctorDashboard />
         </div>
     )

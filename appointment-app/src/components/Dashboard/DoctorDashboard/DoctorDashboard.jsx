@@ -7,7 +7,7 @@ const DoctorDashboard = () =>{
     const [current, setCurrent] = useState('dashboard')
     return(
         <div className="doctorDashboard-container">
-            <DoctorSideBar setCurrent={setCurrent}/>
+            <DoctorSideBar current={current} setCurrent={setCurrent}/>
             <DoctorDashboardContent current={current}/>
         </div>
     )
