@@ -79,7 +79,7 @@ export const UserContextProvider = ({children}) =>{
 
     const userLogout = async () =>{
         console.log('user logout')
-        loading(true)
+        setLoading(true)
             try{
                 const res = await axios.get("https://datamansys.herokuapp.com/api/v1/doctor/logout-doctor")
                     console.log('res', res)
