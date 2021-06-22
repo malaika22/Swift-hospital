@@ -1,0 +1,40 @@
+.login-container{
+    font-family: 'Poppins', sans-serif;
+    .login-div{
+            width: 60%;
+            text-align: center;
+            margin: auto;
+            padding-top: 32px;
+        .logo-div{
+            margin: 0px 0px 50px 0;
+        }
+        .form-div{
+            .form-welcome-title{
+                font-size: 22px;
+                color: #4f4f4f;
+                font-weight: 600;
+                margin-bottom: 20px;
+            }
+            .form{
+                width: 50%;
+                margin: 50px auto;
+                .login-label{
+                    .input-field{
+                        border-radius: 10px;
+                        height: 37px;
+                    }
+                }
+                .submit-label{
+                    margin-top: 35px;
+                    .submit-button{
+                        width: 100%;
+                        background: #55afb1;
+                        border-color: #55afb1;
+                        border-radius: 10px;
+                        height: 42px;
+                    }
+                }
+            }
+        }
+    }
+}
