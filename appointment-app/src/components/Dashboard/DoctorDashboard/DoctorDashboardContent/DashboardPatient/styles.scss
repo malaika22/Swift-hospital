@@ -1,0 +1,54 @@
+.doctor-patients-container{
+        width: 95%;
+        margin: auto;
+        padding: 20px 0;
+    .dashboard-header{
+            padding: 35px 0;
+            padding-top: 0;
+        .dashboard-title{
+                font-size: 25px;
+                color: #30373e;
+                font-weight: 700;
+                letter-spacing: 1px;
+                margin-bottom: 5px;
+        }
+        .welcome-div{
+                font-size: 16px;
+                color: #8e959b;
+                font-weight: 600;
+        }
+    }
+    .patients-container{
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        .patient-card{
+            width: 31.3%;
+            background-color: #ffff;
+            /* margin-right: 20px; */
+            margin: 10px 20px 20px 0px;
+            display: flex;
+            padding: 20px;
+            border-radius: 10px;
+
+            .patient-avatar{
+                margin-right: 20px;
+            }
+            .patient-info{
+                .patient-name{
+                    font-size: 18px;
+                    font-weight: 600;
+                    font-weight: 600;
+                    margin-bottom: 6px;
+                    color: #606060;
+                }
+                .patient-contactNumber{
+                    color: #8e959b;
+                }
+                .patient-email{
+                    color: #8e959b;
+                }
+            }
+        }
+    }
+}
