@@ -7,7 +7,7 @@ import logo from '../../assests/logo.png'
 import './styles.scss'
 
 const Login = () =>{
-    const {userLogin, currentUser} = useContext(UserContext)
+    const {userLogin, currentUser, adminLogin} = useContext(UserContext)
     const [value, setValue] = useState("doctor")
     const [credentials , setCredentials] = useState({
         email : "" ,
@@ -16,8 +16,13 @@ const Login = () =>{
 
     const finishHandler = () =>{
         if(credentials.email && credentials.password){
+            if(value === "doctor") {
+                userLogin(credentials)
+            } else if(value=== "admin"){
+                adminLogin(credentials)
+            }
             console.log('credentials', credentials)
-           userLogin(credentials)
+
         }
     }
 
@@ -84,18 +89,14 @@ const Login = () =>{
                                             name="password"
                                     />
                                 </Form.Item>
-                                {value === 'doctor' ? 
-                                (
                                 <Form.Item className="submit-label">
                                     <Button
                                     type="primary"
                                     key="submit"
                                     className="submit-button"
                                     onClick={finishHandler}
-                                    htmlType="submit">Submit</Button>
+                                    htmlType="submit">{value === 'doctor' ? "Login as doctor": "Login as admin"}</Button>
                                 </Form.Item>
-                                ) : <div>Admin login</div>
-                            }
                             </Form>
 
                     </div>
