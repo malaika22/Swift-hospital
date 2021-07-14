@@ -57,8 +57,8 @@ const AdminSideBar = ({current, setCurrent}) =>{
                             <Menu.Item className="menu-item" key="dashboard">
                                 <HomeFilled className="menu-icon"/> <span className="menuItem-title">Dashboard</span>
                             </Menu.Item>
-                            <Menu.Item className="menu-item" key="appointment"> 
-                                <CalendarFilled className="menu-icon"/> <span className="menuItem-title">Appointment</span>
+                            <Menu.Item className="menu-item" key="doctors"> 
+                                <CalendarFilled className="menu-icon"/> <span className="menuItem-title">Doctors</span>
                             </Menu.Item>
                             <Menu.Item className="menu-item" key="patients"> 
                                 <UserOutlined className="menu-icon"/> <span className="menuItem-title">Patients</span> 
