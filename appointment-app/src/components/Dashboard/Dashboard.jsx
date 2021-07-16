@@ -10,20 +10,26 @@ const Dashboard = () =>{
     const {currentUser, loading} = useContext(UserContext)
     console.log('current user', currentUser)
     const history = useHistory()
+    const renderView = () =>{
+        console.log('render view', currentUser)
+        if(currentUser.role==="doctor"){
+            return <DoctorDashboard />
+        } else if(currentUser.role==="admin"){
+            return <AdminDashboard />
+        }
+    }
     if(loading) {
-        console.log("in loading")
+        console.log("in loading", loading)
         return <LoadSpinner />
     } 
-    else
-    return(
-        <div className="dashboard-container" style={{boxSizing: "border-box"}}>
-            {currentUser || {}.role === "admin" ? 
-                <AdminDashboard /> : 
-                <DoctorDashboard />
-            }
-           
-        </div>
-    )
+    else {
+        return(
+            <div className="dashboard-container" style={{boxSizing: "border-box"}}>
+                {renderView()}
+            </div>
+        )
+    }
+
 }
 
 export default Dashboard
