@@ -5,9 +5,10 @@ import {EyeTwoTone, EyeInvisibleOutlined} from '@ant-design/icons';
 import { UserContext } from '../../contexts/UserContext';
 import logo from '../../assests/logo.png'
 import './styles.scss'
+import LoadSpinner from '../LoadSpinner/LoadSpinner';
 
 const Login = () =>{
-    const {userLogin, currentUser, adminLogin} = useContext(UserContext)
+    const {userLogin, currentUser, adminLogin, loading} = useContext(UserContext)
     const [value, setValue] = useState("doctor")
     const [credentials , setCredentials] = useState({
         email : "" ,
@@ -41,6 +42,7 @@ const Login = () =>{
         console.log('radio', e.target.value)
         setValue(e.target.value)
     }
+
 
     return(
         <div className="login-container">
