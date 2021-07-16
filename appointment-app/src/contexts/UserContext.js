@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import {setUserSession, getToken, removeUserSession} from '../customHooks/useToken'
 import axios from 'axios'
 import { Redirect, useHistory } from 'react-router-dom';
+import { Result } from 'antd';
 
 export const UserContext = createContext();
 
@@ -11,15 +12,22 @@ export const UserContextProvider = ({children}) =>{
     const [docPatients , setDocPatients] = useState([])
     const [sessionUser , setSessionUser] = useState({})
     const [loading, setLoading] = useState(true)
-    const [role, setRole] = useState('')
+    const [adminDocs, setAdminDocs] = useState([])
+    const [adminPatients , setAdminPatients] = useState([])
+    const [adminPatient, setAdminPatient] = useState({})
+    //const [role, setRole] = useState('')
     const history = useHistory()
     
+    useEffect(()=>{
+        setLoading(true)
+    },[currentUser])
     useEffect(()=>{
         console.log('get token', getToken())
         if(getToken()[0] && getToken()[1]){
             const [storageData] = getToken()
             console.log('in codition',currentUser, storageData)
             if(storageData.role==='doctor'){
+                console.log('storage role', storageData.role)
                 userLogin({
                     email: storageData.email,
                     password: storageData.password
@@ -38,6 +46,7 @@ export const UserContextProvider = ({children}) =>{
 
     const userLogin = async (credentials) =>{
          history.push("/")
+         console.log('credentials login', credentials)
         try{
            const res = await axios({
                 method: 'post',
@@ -51,7 +60,10 @@ export const UserContextProvider = ({children}) =>{
             if(res.status === 200){
                 console.log("in success status", res.data.data.user)
                 setCurrentUser(res.data.data.user)
-                setUserSession(res.data.data.user , true)
+                setUserSession({
+                    ...credentials,
+                    ...res.data.data.user
+                } , true)
                 getDoctorPatients()
                 setLoading(false)  
             }
@@ -121,9 +133,13 @@ export const UserContextProvider = ({children}) =>{
         }
     }
 
-    // Admin Context
+    // ###################### Admin Context ###############################3
+
     const adminLogin = async (credentials) => {
-        //history.push("/")
+        console.log('in admin login')
+        history.push("/")
+        //setLoading(true)
+        //console.log('admin login', loading)
         try {
             const res = await axios({
                 method: 'post',
@@ -137,7 +153,12 @@ export const UserContextProvider = ({children}) =>{
             if (res.status === 200) {
                 console.log("in success status", res.data.data.user)
                 setCurrentUser(res.data.data.user)
-                setUserSession(res.data.data.user, true)
+                setUserSession({
+                    ...credentials,
+                    ...res.data.data.user
+                } , true)
+                getAdminDoctors()
+                getAdminPatients()
                 setLoading(false)
             }
         } catch (err) {
@@ -164,9 +185,35 @@ export const UserContextProvider = ({children}) =>{
             } catch(err) {
                 console.log("sign out error", err)
             }
+        }
+
+    const getAdminDoctors = async () =>{
+        setLoading(true)
+        try{
+            const res = await axios.get("https://datamansys.herokuapp.com/api/v1/admin/getAllDoctors", {
+                withCredentials: true
+            })
+            console.log('admin doc', res.data.data.doc)
+            setAdminDocs([...res.data.data.doc])
+        }
+        catch(err) {
+            console.log("error in admin docs", err)
+        }
     }
 
-    
+    const getAdminPatients = async () =>{
+        setLoading(true)
+        try{
+            const res = await axios.get("https://datamansys.herokuapp.com/api/v1/admin/getAllPatients", {
+                withCredentials: true
+            })
+            console.log('admin patient', res.data.data.doc)
+            setAdminPatients([...res.data.data.doc])
+        } catch(err) {
+            console.log('admin patients', err)
+        }
+    }
+
 
 
 
@@ -179,9 +226,12 @@ export const UserContextProvider = ({children}) =>{
             docPatients : docPatients ,
             loading: loading,
             sessionUser : sessionUser,
-            setRole: setRole,
+            //setRole: setRole,
             adminLogin : adminLogin,
-            role: role
+            //role: role,
+            adminLogout : adminLogout,
+            adminDocs: adminDocs,
+            adminPatients: adminPatients
         }}>
             {children}
         </UserContext.Provider>
