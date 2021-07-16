@@ -2,6 +2,7 @@ import React from 'react'
 import { Layout } from 'antd'
 import DashboardHome from '../../DoctorDashboard/DoctorDashboardContent/DashboardHome/DashboardHome'
 import AdminPatient from './AdminPatient/AdminPatient'
+import AdminDoctors from './AdminDoctors/AdminDoctors'
 
 const AdminDashboardContent = ({current}) =>{
         const {Content} = Layout
@@ -12,8 +13,8 @@ const AdminDashboardContent = ({current}) =>{
                 return <DashboardHome />
             case 'patients' :
                 return <AdminPatient />
-           // case 'appointment' : 
-             //   return <DashboardAppointment /> 
+            case 'doctors' : 
+                return <AdminDoctors /> 
             default:
                 return <></>
         }
