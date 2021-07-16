@@ -3,6 +3,8 @@
         margin: auto;
         padding: 20px 0;
     .dashboard-header{
+            height: 96px;
+            overflow: hidden;
             padding: 35px 0;
             padding-top: 0;
         .dashboard-title{
@@ -19,6 +21,8 @@
         }
     }
     .patients-container{
+        height: 489px;
+        overflow: auto;
         display: flex;
         width: 100%;
         flex-wrap: wrap;
