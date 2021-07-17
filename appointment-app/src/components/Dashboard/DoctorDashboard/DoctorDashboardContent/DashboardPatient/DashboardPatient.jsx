@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
-import { Avatar } from 'antd';
+import { Avatar, Button } from 'antd';
 import {UserOutlined} from '@ant-design/icons';
 import { UserContext } from '../../../../../contexts/UserContext'
+import PatientCard from '../../../AdminDashboard/AdminDashboardContent/AdminPatient/PatientCard/PatientCard';
 import './styles.scss'
 
 const DashboardPatient = () =>{
-    const {docPatients} = useContext(UserContext)
-    console.log('doc patients', docPatients)
+    const {docPatients, updatePatient} = useContext(UserContext)
     return(
         <div className="doctor-patients-container">
             <div className="dashboard-header">
@@ -16,17 +16,18 @@ const DashboardPatient = () =>{
             <div className="patients-container">
                 {(docPatients || []).map((data)=>{
                     const patnt = (data || {}).patient
-                    return(
-                        <div className="patient-card">
-                            <div className="patient-avatar">
+                        return (
+                    <div className="patient-card">
+                        <div className="patient-avatar">
                                 <Avatar icon={<UserOutlined/>} size={64}/>
-                            </div>
-                            <div className="patient-info">
+                        </div>
+
+                        <div className="patient-info">
                                 <div className="patient-name">{patnt.name}</div>
                                 <div className="patient-contactNumber">{patnt.contactNumber}</div>
                                 <div className="patient-email">{patnt.email}</div>
-                            </div>
                         </div>
+                    </div>
                     )
                 })}
             </div>

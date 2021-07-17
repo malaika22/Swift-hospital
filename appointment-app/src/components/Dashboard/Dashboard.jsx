@@ -8,7 +8,6 @@ import AdminDashboard from './AdminDashboard/AdminDashboard'
 
 const Dashboard = () =>{
     const {currentUser, loading} = useContext(UserContext)
-    console.log('current user', currentUser)
     const history = useHistory()
     const renderView = () =>{
         console.log('render view', currentUser)
