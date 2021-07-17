@@ -3,6 +3,7 @@ import { Avatar } from 'antd';
 import {UserOutlined} from '@ant-design/icons';
 import { UserContext } from '../../../../../contexts/UserContext'
 import './styles.scss'
+import DoctorCard from './DoctorCard/DoctorCard';
 
 const AdminDoctors = () =>{
     const {adminDocs} = useContext(UserContext)
@@ -16,16 +17,7 @@ const AdminDoctors = () =>{
             <div className="patients-container">
                 {(adminDocs || []).map((data)=>{
                     return(
-                        <div className="patient-card">
-                            <div className="patient-avatar">
-                                <Avatar icon={<UserOutlined/>} size={64}/>
-                            </div>
-                            <div className="patient-info">
-                                <div className="patient-name">{data.name}</div>
-                                <div className="patient-contactNumber">{data.contactNumber}</div>
-                                <div className="patient-email">{data.email}</div>
-                            </div>
-                        </div>
+                        <DoctorCard patnt={data}/>
                     )
                 })}
             </div>
