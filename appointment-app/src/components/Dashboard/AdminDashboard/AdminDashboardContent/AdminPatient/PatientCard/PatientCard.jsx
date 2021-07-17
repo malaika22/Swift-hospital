@@ -6,7 +6,7 @@ import { UserContext } from '../../../../../../contexts/UserContext';
 
 
 const PatientCard = ({patnt}) =>{
-    const {updatePatient} = useContext(UserContext)
+    const {updatePatient, deleteAdminPatient} = useContext(UserContext)
     const [updateStauts, setUpdateStauts] = useState(false)
     const [updatePatnt, setUpdatePatnt] = useState(patnt)
     
@@ -47,45 +47,14 @@ const PatientCard = ({patnt}) =>{
                                 </div>
                                 <div className="updatedButtonDiv">
                                         <Button onClick={()=>setUpdateStauts(!updateStauts)}>Update</Button>
-                                </div>      
+                                </div>    
+                                <div>
+                                        <Button onClick={()=>deleteAdminPatient(patnt)}>Delete</Button>
+                                </div>  
                         </>
                         }
                </div>
         )
-
-        updateStauts ? 
-               <div className="patient-card">
-                    <div className="patient-avatar">
-                            <Avatar icon={<UserOutlined/>} size={64}/>
-                    </div>
-
-                    <div className="patient-info">
-                            <Input name="name" className="patient-name" value={updatePatient.name} onChange={updatePatientHandler}/>
-                            <Input name="number" className="patient-contactNumber" value={updatePatient.contactNumber} onChange={updatePatientHandler}/>
-                            <Input className="patient-email" value={updatePatient.email} name="email" onChange={updatePatientHandler}/>
-                    </div>
-                    <div className="updatedButtonDiv">
-                            <Button onClick={()=>handleUpdatePatient(updatePatient)}>Update</Button>
-                    </div>
-                </div>
-                
-                :
-            (
-                <div className="patient-card">
-                    <div className="patient-avatar">
-                            <Avatar icon={<UserOutlined/>} size={64}/>
-                    </div>
-
-                    <div className="patient-info">
-                            <div className="patient-name">{patnt.name}</div>
-                            <div className="patient-contactNumber">{patnt.contactNumber}</div>
-                            <div className="patient-email">{patnt.email}</div>
-                    </div>
-                    <div className="updatedButtonDiv">
-                            <Button onClick={()=>setUpdateStauts(!updateStauts)}>Update</Button>
-                    </div>
-                </div>
-            )
 }
 
 export default PatientCard
