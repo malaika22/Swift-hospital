@@ -215,6 +215,38 @@ export const UserContextProvider = ({children}) =>{
     }
 
 
+    const updatePatient = async (patientInfo) =>{
+        console.log('in context patients', patientInfo)
+       const updatedPatients =  adminPatients.map(patient=>
+           patientInfo._id === patient._id ? 
+            {
+                ...patientInfo
+            } : 
+             {
+                 ...patient
+             }
+       )
+       setAdminPatients(
+           [
+           ...updatedPatients
+        ]
+       )
+
+       try{
+       const res = await axios.patch(`https://datamansys.herokuapp.com/api/v1/admin/get-patient-by-id/${patientInfo._id}`,{
+            ...patientInfo
+       } , {
+           withCredentials: true
+       })
+
+        console.log('update patient res', res)
+
+       } catch(err) {
+           console.log('update error', err)
+       }
+
+}
+
 
 
     return(
@@ -231,7 +263,8 @@ export const UserContextProvider = ({children}) =>{
             //role: role,
             adminLogout : adminLogout,
             adminDocs: adminDocs,
-            adminPatients: adminPatients
+            adminPatients: adminPatients,
+            updatePatient: updatePatient
         }}>
             {children}
         </UserContext.Provider>
