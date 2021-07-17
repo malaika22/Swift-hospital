@@ -19,9 +19,6 @@ export const UserContextProvider = ({children}) =>{
     const history = useHistory()
     
     useEffect(()=>{
-        setLoading(true)
-    },[currentUser])
-    useEffect(()=>{
         console.log('get token', getToken())
         if(getToken()[0] && getToken()[1]){
             const [storageData] = getToken()
@@ -39,13 +36,14 @@ export const UserContextProvider = ({children}) =>{
                 })
             }
         } else{
-            //setLoading('no user')
+            console.log('in effect else')
             history.push("/login")
         }
     }, [])
 
     const userLogin = async (credentials) =>{
-         history.push("/")
+        setLoading(true)
+        history.push("/")
          console.log('credentials login', credentials)
         try{
            const res = await axios({
@@ -64,8 +62,8 @@ export const UserContextProvider = ({children}) =>{
                     ...credentials,
                     ...res.data.data.user
                 } , true)
+                setLoading(false)
                 getDoctorPatients()
-                setLoading(false)  
             }
         } catch(err) {
             console.log('login error', err)
@@ -137,8 +135,8 @@ export const UserContextProvider = ({children}) =>{
 
     const adminLogin = async (credentials) => {
         console.log('in admin login')
+        setLoading(true)
         history.push("/")
-        //setLoading(true)
         //console.log('admin login', loading)
         try {
             const res = await axios({
@@ -294,6 +292,22 @@ export const UserContextProvider = ({children}) =>{
        }
     }   
 
+        const deleteAdminDoctor = async (doctorInfo) =>{
+        const updatedDoctors = adminDocs.filter(doctor=> doctor._id !== doctorInfo._id)
+        console.log('after deletion', updatedDoctors)
+        setAdminDocs(
+            [...updatedDoctors]
+        )
+        try{
+            const res = await axios.delete(`https://datamansys.herokuapp.com/api/v1/admin/get-doctor-by-id/${doctorInfo._id}`,{
+                withCredentials: true
+            })
+            console.log('delete res', res)
+        } catch(err) {
+            console.log('delete error', err)
+        }
+    }
+
 
     return(
         <UserContext.Provider value={{
@@ -312,7 +326,8 @@ export const UserContextProvider = ({children}) =>{
             adminPatients: adminPatients,
             updatePatient: updatePatient,
             deleteAdminPatient : deleteAdminPatient,
-            updateDoctor: updateDoctor
+            updateDoctor: updateDoctor,
+            deleteAdminDoctor: deleteAdminDoctor
         }}>
             {children}
         </UserContext.Provider>

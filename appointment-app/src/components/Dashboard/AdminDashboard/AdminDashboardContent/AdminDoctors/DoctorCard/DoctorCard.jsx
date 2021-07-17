@@ -6,7 +6,7 @@ import { UserContext } from '../../../../../../contexts/UserContext';
 
 
 const DoctorCard = ({patnt}) =>{
-    const {updateDoctor, deleteAdminPatient} = useContext(UserContext)
+    const {updateDoctor, deleteAdminDoctor} = useContext(UserContext)
     const [updateStauts, setUpdateStauts] = useState(false)
     const [updateDoc, setUpdateDoc] = useState(patnt)
     
@@ -49,7 +49,7 @@ const DoctorCard = ({patnt}) =>{
                                         <Button onClick={()=>setUpdateStauts(!updateStauts)}>Update</Button>
                                 </div>    
                                 <div>
-                                        <Button onClick={()=>deleteAdminPatient(patnt)}>Delete</Button>
+                                        <Button onClick={()=>deleteAdminDoctor(patnt)}>Delete</Button>
                                 </div>  
                         </>
                         }
