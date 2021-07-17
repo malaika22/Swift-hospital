@@ -247,6 +247,52 @@ export const UserContextProvider = ({children}) =>{
 
 }
 
+    const deleteAdminPatient = async (patientInfo) =>{
+        const updatedPatients = adminPatients.filter(patient=> patient._id !== patientInfo._id)
+        console.log('after deletion', updatedPatients)
+        setAdminPatients(
+            [...updatedPatients]
+        )
+        try{
+            const res = await axios.delete(`https://datamansys.herokuapp.com/api/v1/admin/get-patient-by-id/${patientInfo._id}`,{
+                withCredentials: true
+            })
+            console.log('delete res', res)
+        } catch(err) {
+            console.log('delete error', err)
+        }
+    }
+
+    const updateDoctor = async (doctorInfo) => {
+        console.log('doctor info', doctorInfo)
+        const updatedDoctors =  adminDocs.map(doctor=>
+           doctorInfo._id === doctor._id ? 
+            {
+                ...doctorInfo
+            } : 
+             {
+                 ...doctor
+             }
+       )
+       setAdminDocs(
+           [
+           ...updatedDoctors
+        ]
+       )
+
+        try{
+            const res = await axios.patch(`https://datamansys.herokuapp.com/api/v1/admin/get-doctor-by-id/${doctorInfo._id}`,{
+            ...doctorInfo
+            } , {
+                withCredentials: true
+            })
+
+                console.log('update patient res', res)
+
+       } catch(err) {
+           console.log('update error', err)
+       }
+    }   
 
 
     return(
@@ -264,7 +310,9 @@ export const UserContextProvider = ({children}) =>{
             adminLogout : adminLogout,
             adminDocs: adminDocs,
             adminPatients: adminPatients,
-            updatePatient: updatePatient
+            updatePatient: updatePatient,
+            deleteAdminPatient : deleteAdminPatient,
+            updateDoctor: updateDoctor
         }}>
             {children}
         </UserContext.Provider>
