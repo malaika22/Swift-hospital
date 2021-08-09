@@ -8,3 +8,4 @@ Lake View Hospital is a React.js based application, it let the doctors and patie
 3. React Hooks
 4. Api integration
 5. Ant Design
+6. Chart.js
